@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package squareSubsequences;
+package squareSubSequences;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -30,11 +30,11 @@ public class SquareSubsequence {
 	}
 
 	public boolean formsNewSquareSubsequence(SquareSubsequence other) {
+		// delete exception and implement here
+		// ONLY FOR DYNAMIC PROGRAMMING 2!
 
-		if (true) {
-			throw new UnsupportedOperationException("Implement formsNewSquareSubsequence in class SquareSubsequence.");
-		}
-		
+		if (this.equals(other))
+			return true;
 		return false;
 	}
 
@@ -65,7 +65,7 @@ public class SquareSubsequence {
 		hash = 97 * hash + Objects.hashCode(this.halfString);
 		hash = 97 * hash + Objects.hashCode(this.leftIndices);
 		hash = 97 * hash + Objects.hashCode(this.rightIndices);
-		
+
 		return hash;
 	}
 

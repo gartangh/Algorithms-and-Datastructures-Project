@@ -1,5 +1,6 @@
 package datastructures;
 
+import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 /**
@@ -45,24 +46,42 @@ public class FixedSizedPriorityQueue extends PriorityQueue<ComparableSimpleEntry
 	 */
 	@Override
 	public boolean add(ComparableSimpleEntry e) {
-		// TODO: Delete exception and implement here
-		if (true) {
-			throw new UnsupportedOperationException("Implement the function add in class FixedSizedPriorityQueue.");
+		// Delete exception and implement here
+		if (elementsLeft > 0) {
+			elementsLeft--;
+			super.offer(e);
+			
+			return true;
 		}
+		else {
+			if (super.peek().compareTo(e) < 0) {
+				super.offer(e);
+				super.poll();
+				
+				return true;
+			}
+		}
+		
 		return false;
-
 	}
 
 	@Override
 	public String toString() {
-		// TODO: Delete exception and implement here
+		// Delete exception and implement here
 		// Do this in such way that the first element printed is the most
 		// important one (e.g. the movie with the smallest distances (key))
-		if (true) {
-			throw new UnsupportedOperationException("Implement toString in class FixedSizedPriorityQueue.");
+		String res = "";
+		ArrayList<ComparableSimpleEntry> arr = new ArrayList<>();
+		
+		for (ComparableSimpleEntry i : this) {
+			arr.add(i);
 		}
-
-		return "";
+		
+		for (int i = arr.size() - 1; i >= 0; i--) {
+			res += arr.get(i).getValue().toString();
+			res += "\n";
+		}
+		
+		return res;
 	}
-
 }

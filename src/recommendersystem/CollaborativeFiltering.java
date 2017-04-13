@@ -40,9 +40,8 @@ public class CollaborativeFiltering {
 		HashMap<Integer, ArrayList<Rating>> ratingsIndexedByMovie = DataReader
 				.openRatingFileIndexedByMovie("data/ratings1.dat", users, movies);
 
-		// ****************** Scenario 1: from rating to array
+		// ****************** Scenario 1: From rating to array
 		// **********************************************
-
 		if (debug == 1) {
 			Object[] rta = Calculate.ratingToArray(ratingsIndexedByMovie.get(1), ratingsIndexedByMovie.get(4));
 
@@ -99,7 +98,7 @@ public class CollaborativeFiltering {
 			}
 		}
 
-		// ****************** Scenario 2: calculate the distance between two
+		// ****************** Scenario 2: Calculate the distance between two
 		// movies **********************************************
 		// QUESTION: Can you give an example where the cosine distance is
 		// totally wrong? (So you see that the movies are not similar at all,
@@ -130,7 +129,7 @@ public class CollaborativeFiltering {
 			}
 		}
 
-		// ****************** Scenario 2: for one movie find similar movies
+		// ****************** Scenario 3: for one movie find similar movies
 		// **********************************************
 		// QUESTION: What happens if a movie is not rated? How would you solve
 		// it?
@@ -152,7 +151,7 @@ public class CollaborativeFiltering {
 
 		}
 
-		// ****************** Scenario 3: Compute a rating for all users for
+		// ****************** Scenario 4: Compute a rating for all users for
 		// that movie **********************************************
 		// QUESTION: How would you use this to recommend only the movies with
 		// the highest rating.
@@ -173,7 +172,7 @@ public class CollaborativeFiltering {
 
 		}
 
-		// ****************** Scenario 4: Compute a weighted rating for that
+		// ****************** Scenario 5: Compute a weighted rating for that
 		// movie **********************************************
 		//
 		similarToA = Select.relatedMoviesCollaborative(a, new ArrayList<>(movies.values()), ratingsIndexedByMovie,

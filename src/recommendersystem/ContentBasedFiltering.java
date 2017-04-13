@@ -18,8 +18,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import squareSubsequences.Dynamic2;
-import squareSubsequences.Dynamic1;
+import squareSubSequences.Dynamic2;
+import squareSubSequences.Dynamic1;
 
 /**
  *
@@ -28,7 +28,7 @@ import squareSubsequences.Dynamic1;
 public class ContentBasedFiltering {
 
 	public static void main(String[] args) throws IOException {
-		int debug = 3; // The number of the scenario you want to debug
+		int debug = 4; // The number of the scenario you want to debug
 
 		// ****************** Scenario 0: Reading the data.
 		// **********************************************
@@ -53,15 +53,15 @@ public class ContentBasedFiltering {
 		// E.g., in the string 'baaba' a subsequence is (aa) where the indices
 		// of the letters are: 1 and 2
 		// so you can store this in the following way:
-		// SquareSubsequence(a, a, 1, 1, 2, 2)
+		// SquareSubsequence(a, 1, 2)
 		// E.g., in the string 'baaba' another subsequence is (baba) where the
 		// indices of the letters are: 0, 1, 3 and 4
 		// so you can store this in the following way:
-		// SquareSubsequence(ab, ab, 0, 1, 3, 4)
+		// SquareSubsequence(ab, 0-1, 3-4)
 		// E.g., in the string 'baacbac' a subsequence is (bacbac) where the
 		// indices of the letters are: 0, 1, 3, 4, 5 and 6
 		// so you can store this in the following way:
-		// SquareSubsequence(bac, bac, 0, 3, 4, 6)
+		// SquareSubsequence(bac, 0-1-3, 4-5-6)
 
 		// QUESTION: Compute the complexity of the first dynamic approach. You
 		// will see it is not very efficient.
@@ -70,26 +70,26 @@ public class ContentBasedFiltering {
 		// QUESTION: If you implemented the second approach, compute its
 		// complexity.
 
-		boolean dynamic1 = true; // True: you implemented the recursive way,
-									// False: you implemented the dynamic way
+		boolean dynamic1 = true; // True: you implemented the dynamic way,
+									// False: you implemented the recursive way
 
 		// Iterate over all movies, calculate the amount of square subsequences,
 		// and set it as an attribute of the movie
 		for (Movie m : movies.values()) {
-
 			String s = m.getTitle();
 			int amount;
+
 			if (dynamic1) {
 				amount = Dynamic1.amountOfSquareSubSequences(s);
 			} else {
 				amount = Dynamic2.amountOfSquareSubSequences(s);
 			}
 			m.setAmountOfSquareSubSequences(amount);
-
 		}
 
 		if (debug == 1) {
 			System.out.println("Debugging the calculation of square subsequences");
+			
 			String path = "data/input01.txt";
 			BufferedReader textReader = new BufferedReader(new FileReader(path));
 
@@ -100,7 +100,7 @@ public class ContentBasedFiltering {
 				String aLine = textReader.readLine();
 				int correctAnswer = Integer.parseInt(textReaderOutput.readLine());
 				int ourAnswer;
-				if (recursive) {
+				if (dynamic1) {
 					ourAnswer = Dynamic1.amountOfSquareSubSequences(aLine);
 				} else {
 					ourAnswer = Dynamic2.amountOfSquareSubSequences(aLine);
@@ -110,8 +110,8 @@ public class ContentBasedFiltering {
 							+ "subsequences and not " + ourAnswer);
 				}
 			}
-
 		}
+
 		// ****************** Scenario 2: Select the favorite movies of the user
 		// **********************************************
 		// For a specific user, find the movie(s) it rated the most. If multiple
@@ -121,6 +121,8 @@ public class ContentBasedFiltering {
 		ArrayList<Movie> favoriteMovie = Select.maxRating(ratingsUser);
 
 		if (debug == 2) {
+			System.out.println("Debugging the selection of a user's favorite movie(s)");
+			
 			Movie firstMovie = favoriteMovie.get(0);
 			if (!firstMovie.equals(movies.get(4))) {
 				System.out.println("The favorite movie of user with ID 1 is the movie with ID 4 (Twilight Saga)");
@@ -129,8 +131,9 @@ public class ContentBasedFiltering {
 
 		// ****************** Scenario 3: The FixedSizedPriorityQueue
 		// **********************************************
-
-		if (debug == 2) {
+		if (debug == 3) {
+			System.out.println("Debugging the FixedSizedPriorityQueue");
+			
 			int sizeFspqTest = 3;
 			FixedSizedPriorityQueue fspqTest = new FixedSizedPriorityQueue(sizeFspqTest);
 
@@ -181,8 +184,8 @@ public class ContentBasedFiltering {
 			wantedString += movie1;
 			wantedString += "\n";
 			if (!generated.equals(wantedString)) {
-				System.out.println("You created the following string: \n" + generated
-						+ "but the following string is wanted: " + wantedString);
+				System.out.println("You created the following string:\n" + generated
+						+ "but the following string is wanted:\n" + wantedString);
 			}
 		}
 

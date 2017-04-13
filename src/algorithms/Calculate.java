@@ -32,10 +32,12 @@ public class Calculate {
 	 *         based.
 	 */
 	public static int distanceToRelatedMoviesContentBased(Movie a, ArrayList<Movie> relatedMovies) {
+		// TODO: Delete exception and implement here
 		int min_distance = Integer.MAX_VALUE;
 		if (true) {
 			throw new UnsupportedOperationException("Implement distanceToRelatedMovies in class Calculate.");
 		}
+
 		return min_distance;
 	}
 

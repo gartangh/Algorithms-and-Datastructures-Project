@@ -32,12 +32,17 @@ public class Select {
 	public static ArrayList<Movie> maxRating(ArrayList<Rating> ratingsUser) {
 		double max_rating = 0.0;
 		ArrayList<Movie> maxRatings = new ArrayList<>();
-		// TODO: Delete exception and implement here
-		if (true) {
-			throw new UnsupportedOperationException("Implement maxRating in class Select.");
+		// Delete exception and implement here
+		for (Rating rating : ratingsUser) {
+			if (rating.getRating() == max_rating) maxRatings.add(rating.getMovie());
+			else if (rating.getRating() > max_rating) {
+				max_rating = rating.getRating();
+				maxRatings = new ArrayList<>();
+				maxRatings.add(rating.getMovie());
+			}
 		}
-		return maxRatings;
 
+		return maxRatings;
 	}
 
 	/**
@@ -54,11 +59,13 @@ public class Select {
 	 */
 	public static FixedSizedPriorityQueue relatedMoviesContentBased(ArrayList<Movie> likedMovies,
 			ArrayList<Movie> ratedMovies, ArrayList<Movie> allMovies, int amountOfRelatedMovies) {
+		
 		FixedSizedPriorityQueue fspq = new FixedSizedPriorityQueue(amountOfRelatedMovies);
 		// TODO: Delete exception and implement here
 		if (true) {
 			throw new UnsupportedOperationException("Implement relatedMoviesContentBased in class Select.");
 		}
+		
 		return fspq;
 	}
 
