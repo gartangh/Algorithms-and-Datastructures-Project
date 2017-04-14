@@ -59,11 +59,11 @@ public class CollaborativeFiltering {
 			a2Correct.add(2.5);
 			a2Correct.add(2.0);
 			if (!a1Correct.equals(a1)) {
-				System.out.println("The array related to movie with ID 1 must be: " + a1Correct.toString() + "and not: "
+				System.out.println("The array related to movie with ID 1 must be: " + a1Correct.toString() + " and not: "
 						+ a1.toString());
 			}
 			if (!a2Correct.equals(a2)) {
-				System.out.println("The array related to movie with ID 2 must be: " + a2Correct.toString() + "and not: "
+				System.out.println("The array related to movie with ID 2 must be: " + a2Correct.toString() + " and not: "
 						+ a2.toString());
 			}
 			if (!inCommonRatings) {
@@ -85,6 +85,7 @@ public class CollaborativeFiltering {
 			a2Correct.add(2.5);
 			a2Correct.add(2.5);
 			a2Correct.add(4.0);
+			
 			if (!a1Correct.equals(a1)) {
 				System.out.println("The array related to movie with ID 1 must be: " + a1Correct.toString() + "and not: "
 						+ a1.toString());
@@ -148,7 +149,6 @@ public class CollaborativeFiltering {
 				System.out.println("The related movies are wrong. You have this: \n " + similarToA.toString()
 						+ "\n but it needs to be this: \n" + correct);
 			}
-
 		}
 
 		// ****************** Scenario 4: Compute a rating for all users for
@@ -169,7 +169,6 @@ public class CollaborativeFiltering {
 				System.out.println(
 						"Your predicted values are: \n" + predicted + "But the correct ones are: \n" + correct);
 			}
-
 		}
 
 		// ****************** Scenario 5: Compute a weighted rating for that
@@ -191,7 +190,5 @@ public class CollaborativeFiltering {
 						"Your predicted values are: \n" + predicted + "But the correct ones are: \n" + correct);
 			}
 		}
-
 	}
-
 }

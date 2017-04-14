@@ -61,9 +61,18 @@ public class Select {
 			ArrayList<Movie> ratedMovies, ArrayList<Movie> allMovies, int amountOfRelatedMovies) {
 		
 		FixedSizedPriorityQueue fspq = new FixedSizedPriorityQueue(amountOfRelatedMovies);
-		// TODO: Delete exception and implement here
-		if (true) {
-			throw new UnsupportedOperationException("Implement relatedMoviesContentBased in class Select.");
+		// Delete exception and implement here
+		// FOR CONTEND BASED ONLY
+		double distance;
+		
+		for (Movie allMovie : allMovies) {
+			if (!ratedMovies.contains(allMovie)) {
+				distance = Calculate.distanceToRelatedMoviesContentBased(allMovie, likedMovies);
+				
+				ComparableSimpleEntry cse = new ComparableSimpleEntry(distance, allMovie);
+				
+				fspq.add(cse);
+			}
 		}
 		
 		return fspq;
@@ -86,13 +95,23 @@ public class Select {
 	 */
 	public static FixedSizedPriorityQueue relatedMoviesCollaborative(Movie likedMovie, ArrayList<Movie> allMovies,
 			HashMap<Integer, ArrayList<Rating>> ratingsIndexedByMovie, int amountOfRelatedMovies) throws Exception {
+		
 		FixedSizedPriorityQueue fspq = new FixedSizedPriorityQueue(amountOfRelatedMovies);
 
-		// TODO: Delete exception and implement here
-		if (true) {
-			throw new UnsupportedOperationException("Implement relatedMoviesContentBased in class Select.");
+		// Delete exception and implement here
+		// FOR COLABORATIVE BASED ONLY
+		double distance;
+		
+		for (Movie movie : allMovies) {
+			if (likedMovie != movie) {
+				distance = Calculate.distanceBetweenTwoMovies(ratingsIndexedByMovie.get(likedMovie.getId()), ratingsIndexedByMovie.get(movie.getId()), "euclidean");
+				
+				ComparableSimpleEntry cse = new ComparableSimpleEntry(distance, movie);
+				
+				fspq.add(cse);
+			}
 		}
+		
 		return fspq;
 	}
-
 }

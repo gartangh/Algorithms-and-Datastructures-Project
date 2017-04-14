@@ -278,7 +278,7 @@ public final class DataReader {
 				int rat = Integer.parseInt(features[2]);
 				int time = Integer.parseInt(features[3]);
 
-				// get user and movie from lit
+				// get user and movie from list
 				User user = users.get(userId);
 				Movie movie = movies.get(movieId);
 
@@ -289,7 +289,7 @@ public final class DataReader {
 				// create rating
 				Rating r = new Rating(user, movie, rat, time);
 
-				// add to lise or create new array
+				// add to list or create new array
 				if (ratingsByMovie.containsKey(movieId)) {
 					ratingsByMovie.get(movieId).add(r);
 				} else {
@@ -297,7 +297,6 @@ public final class DataReader {
 					lst.add(r);
 					ratingsByMovie.put(movieId, lst);
 				}
-
 			}
 
 		} catch (FileNotFoundException e) {
@@ -317,7 +316,5 @@ public final class DataReader {
 
 		// return list
 		return ratingsByMovie;
-
 	}
-
 }

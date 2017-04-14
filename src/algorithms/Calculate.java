@@ -31,11 +31,16 @@ public class Calculate {
 	 *         relatedMovies is returned. The distance is calculated content
 	 *         based.
 	 */
-	public static int distanceToRelatedMoviesContentBased(Movie a, ArrayList<Movie> relatedMovies) {
-		// TODO: Delete exception and implement here
-		int min_distance = Integer.MAX_VALUE;
-		if (true) {
-			throw new UnsupportedOperationException("Implement distanceToRelatedMovies in class Calculate.");
+	public static double distanceToRelatedMoviesContentBased(Movie a, ArrayList<Movie> relatedMovies) {
+		// Delete exception and implement here
+		double min_distance = Double.MAX_VALUE;
+		double distance;
+		
+		for (Movie movie : relatedMovies) {
+			distance = Math.abs(a.getAmountOfSquareSubSequences() - movie.getAmountOfSquareSubSequences());
+			if (distance < min_distance) {
+				min_distance = distance;
+			}
 		}
 
 		return min_distance;
@@ -43,7 +48,9 @@ public class Calculate {
 
 	public static double distanceBetweenTwoMovies(ArrayList<Rating> movie1, ArrayList<Rating> movie2, String type)
 			throws Exception {
+		
 		Object[] ratingArrays = ratingToArray(movie1, movie2);
+		
 		if (type.equals("cosine")) {
 			return cosineDistance(ratingArrays);
 		} else if (type.equals("euclidean")) {
@@ -51,7 +58,6 @@ public class Calculate {
 		} else {
 			throw new Exception("Type of distance is not defined");
 		}
-
 	}
 
 	/**
@@ -125,24 +131,59 @@ public class Calculate {
 	 *         for movie two, if necessary with additional values ((see
 	 *         example)). The third element is a boolean stating if the movies
 	 *         were rated by the same user or not.
-	 * 
 	 */
 
 	public static Object[] ratingToArray(ArrayList<Rating> movie1, ArrayList<Rating> movie2) {
 		boolean inCommonRatings = false;
+		double standard = 2.5;
 
 		ArrayList<Double> r1 = new ArrayList<>();
 		ArrayList<Double> r2 = new ArrayList<>();
 
-		// TODO: Delete exception and implement here
-		if (true) {
-			throw new UnsupportedOperationException("Implement ratingToArray in class Calculate.");
+		// Delete exception and implement here
+		// Do it like insertionSort
+		
+		int i = 0, j = 0;
+		
+		while (i < movie1.size() || j < movie2.size()) {
+			if (i == movie1.size()) {
+				r1.add(standard);
+
+				r2.add(movie2.get(j).getRating());
+				j++;
+			} else if (j == movie2.size()) {
+				r1.add(movie1.get(i).getRating());
+				i++;
+
+				r2.add(standard);
+			} else {
+				if (movie1.get(i).getUser().getId() == movie2.get(j).getUser().getId()) {
+					inCommonRatings = true;
+
+					r1.add(movie1.get(i).getRating());
+					i++;
+
+					r2.add(movie2.get(j).getRating());
+					j++;
+				} else if (movie1.get(i).getUser().getId() < movie2.get(j).getUser().getId()) {
+					r1.add(movie1.get(i).getRating());
+					i++;
+
+					r2.add(standard);
+				} else if (movie1.get(i).getUser().getId() > movie2.get(j).getUser().getId()) {
+					r1.add(standard);
+
+					r2.add(movie2.get(j).getRating());
+					j++;
+				}
+			}
 		}
 
 		Object[] result = new Object[3];
 		result[0] = r1;
 		result[1] = r2;
 		result[2] = inCommonRatings;
+		
 		return result;
 	}
 
@@ -161,12 +202,28 @@ public class Calculate {
 		ArrayList<Double> a2 = (ArrayList<Double>) result[1];
 		boolean inCommonRatings = (boolean) result[2];
 
-		// TODO: Delete exception and implement here
-		if (true) {
-			throw new UnsupportedOperationException("Implement cosineDistance in class Calculate.");
-		}
-		return 0.0;
+		// Delete exception and implement here
+		double res = 0.0;
 
+		if (inCommonRatings) {
+			double a = 0.0, b = 0.0, c = 0.0;
+
+			for (int i = 0; i < a1.size(); i++) {
+				a += a1.get(i) * a2.get(i);
+				b += Math.pow(a1.get(i), 2);
+				c += Math.pow(a2.get(i), 2);
+			}
+
+			b = Math.sqrt(b);
+			c = Math.sqrt(c);
+
+			res = a / (b * c);
+
+			res = 1 - res;
+		} else
+			res = Double.POSITIVE_INFINITY;
+
+		return res;
 	}
 
 	/**
@@ -184,13 +241,18 @@ public class Calculate {
 		ArrayList<Double> a2 = (ArrayList<Double>) result[1];
 		boolean inCommonRatings = (boolean) result[2];
 
-		// TODO: Delete exception and implement here
-		if (true) {
-			throw new UnsupportedOperationException("Implement euclideanDistance in class Calculate.");
-		}
+		// Delete exception and implement here
+		double res = 0.0;
 
-		return 0.0;
+		if (inCommonRatings) {
+			for (int i = 0; i < a1.size(); i++) {
+				res += Math.pow(a1.get(i) - a2.get(i), 2);
+			}
 
+			res = Math.sqrt(res);
+		} else
+			res = Double.POSITIVE_INFINITY;
+
+		return res;
 	}
-
 }

@@ -28,7 +28,7 @@ import squareSubSequences.Dynamic1;
 public class ContentBasedFiltering {
 
 	public static void main(String[] args) throws IOException {
-		int debug = 4; // The number of the scenario you want to debug
+		int debug = 5; // The number of the scenario you want to debug
 
 		// ****************** Scenario 0: Reading the data.
 		// **********************************************
@@ -193,7 +193,8 @@ public class ContentBasedFiltering {
 		// to the set of liked movies
 		// **********************************************
 		Movie m = movies.get(1);
-		int distance = Calculate.distanceToRelatedMoviesContentBased(m, favoriteMovie);
+		double distance = Calculate.distanceToRelatedMoviesContentBased(m, favoriteMovie);
+		
 		if (debug == 4) {
 			if (distance != 8) {
 				System.out.println("The distance from the movie to the liked movies must be 8 ");
@@ -225,9 +226,6 @@ public class ContentBasedFiltering {
 				System.out.println("You recommended the following movies: \n" + generated
 						+ "while the following movies must be recommended: " + wantedString);
 			}
-
 		}
-
 	}
-
 }
