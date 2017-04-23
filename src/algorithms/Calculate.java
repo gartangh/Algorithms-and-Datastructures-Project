@@ -78,45 +78,47 @@ public class Calculate {
 
 		HashMap<User, Double> ratingsMovie = new HashMap<>();
 		HashMap<User, Integer> amountUsersRatedMovie = new HashMap<>();
-		
+
 		// Delete exception and implement here
 		ArrayList<Rating> ratingsOfA = ratingsIndexedByMovie.get(a.getId());
-		
+
 		for (ComparableSimpleEntry comparableSimpleEntry : similarToA) {
-			Movie similarMovie = (Movie)comparableSimpleEntry.getValue();
-			
+			Movie similarMovie = (Movie) comparableSimpleEntry.getValue();
+
 			ArrayList<Rating> ratingsOfSimilarMovie = ratingsIndexedByMovie.get(similarMovie.getId());
-			
-			for (Rating rating : ratingsOfSimilarMovie) {				
+
+			for (Rating rating : ratingsOfSimilarMovie) {
 				boolean valid = true;
 				for (Rating ratingA : ratingsOfA) {
 					if (ratingA.getUser().getId() == rating.getUser().getId()) {
 						valid = false;
 					}
 				}
-				
-				if (valid
-						&& !ratingsMovie.containsKey(rating.getUser())
+
+				if (valid && !ratingsMovie.containsKey(rating.getUser())
 						&& !amountUsersRatedMovie.containsKey(rating.getUser())) {
-					// The user of this rating did not rate Movie a and we didn't see that user before
-					// add <user, 1> to the HashMap amountUsersRatedMovie 
+					// The user of this rating did not rate Movie a and we
+					// didn't see that user before
+					// add <user, 1> to the HashMap amountUsersRatedMovie
 					amountUsersRatedMovie.put(rating.getUser(), 1);
 					// add <user, rating> to the HashMap ratingsMovie
 					ratingsMovie.put(rating.getUser(), rating.getRating());
-				}
-				else if (valid) {
-					// The user of this rating did not rate Movie a, but we have seen that user before
-					double averageRating = ratingsMovie.get(rating.getUser()) * amountUsersRatedMovie.get(rating.getUser()) + rating.getRating();
-					// Increase value of user in HashMap amountUsersRatedMovie by 1
+				} else if (valid) {
+					// The user of this rating did not rate Movie a, but we have
+					// seen that user before
+					double averageRating = ratingsMovie.get(rating.getUser())
+							* amountUsersRatedMovie.get(rating.getUser()) + rating.getRating();
+					// Increase value of user in HashMap amountUsersRatedMovie
+					// by 1
 					amountUsersRatedMovie.replace(rating.getUser(), amountUsersRatedMovie.get(rating.getUser()) + 1);
-					
+
 					averageRating /= amountUsersRatedMovie.get(rating.getUser());
 					// add <user, averageRating> to the HashMap ratingsMovie
 					ratingsMovie.replace(rating.getUser(), averageRating);
 				}
 			}
 		}
-		
+
 		return ratingsMovie;
 	}
 
@@ -141,42 +143,45 @@ public class Calculate {
 
 		// Delete exception and implement here
 		ArrayList<Rating> ratingsOfA = ratingsIndexedByMovie.get(a.getId());
-		
+
 		for (ComparableSimpleEntry comparableSimpleEntry : similarToA) {
-			Movie similarMovie = (Movie)comparableSimpleEntry.getValue();
-			
+			Movie similarMovie = (Movie) comparableSimpleEntry.getValue();
+
 			ArrayList<Rating> ratingsOfSimilarMovie = ratingsIndexedByMovie.get(similarMovie.getId());
-			
-			for (Rating rating : ratingsOfSimilarMovie) {				
+
+			for (Rating rating : ratingsOfSimilarMovie) {
 				boolean valid = true;
 				for (Rating ratingA : ratingsOfA) {
 					if (ratingA.getUser().getId() == rating.getUser().getId()) {
 						valid = false;
 					}
 				}
-				
-				if (valid
-						&& !ratingsMovie.containsKey(rating.getUser())
+
+				if (valid && !ratingsMovie.containsKey(rating.getUser())
 						&& !amountUsersRatedMovie.containsKey(rating.getUser())) {
-					// The user of this rating did not rate Movie a and we didn't see that user before
-					// add <user, 1> to the HashMap amountUsersRatedMovie 
+					// The user of this rating did not rate Movie a and we
+					// didn't see that user before
+					// add <user, distance> to the HashMap amountUsersRatedMovie
 					amountUsersRatedMovie.put(rating.getUser(), comparableSimpleEntry.getKey());
 					// add <user, rating> to the HashMap ratingsMovie
 					ratingsMovie.put(rating.getUser(), rating.getRating());
-				}
-				else if (valid) {
-					// The user of this rating did not rate Movie a, but we have seen that user before
-					double averageRating = ratingsMovie.get(rating.getUser()) * amountUsersRatedMovie.get(rating.getUser()) + rating.getRating();
-					// Increase value of user in HashMap amountUsersRatedMovie by 1
-					amountUsersRatedMovie.replace(rating.getUser(), amountUsersRatedMovie.get(rating.getUser()) + 1);
-					
+				} else if (valid) {
+					// The user of this rating did not rate Movie a, but we have
+					// seen that user before
+					double averageRating = ratingsMovie.get(rating.getUser())
+							* amountUsersRatedMovie.get(rating.getUser()) + rating.getRating() * comparableSimpleEntry.getKey();
+					// Increase value of user in HashMap amountUsersRatedMovie
+					// by the distance
+					amountUsersRatedMovie.replace(rating.getUser(),
+							amountUsersRatedMovie.get(rating.getUser()) + comparableSimpleEntry.getKey());
+
 					averageRating /= amountUsersRatedMovie.get(rating.getUser());
 					// add <user, averageRating> to the HashMap ratingsMovie
 					ratingsMovie.replace(rating.getUser(), averageRating);
 				}
 			}
 		}
-		
+
 		return ratingsMovie;
 	}
 
