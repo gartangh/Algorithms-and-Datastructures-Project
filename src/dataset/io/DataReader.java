@@ -205,7 +205,7 @@ public final class DataReader {
 				// create rating
 				Rating r = new Rating(user, movie, rat, time);
 
-				// add to lise or create new array
+				// add to list or create new array
 				if (ratingsByUser.containsKey(userId)) {
 					ratingsByUser.get(userId).add(r);
 				} else {
@@ -213,7 +213,6 @@ public final class DataReader {
 					lst.add(r);
 					ratingsByUser.put(userId, lst);
 				}
-
 			}
 
 		} catch (FileNotFoundException e) {

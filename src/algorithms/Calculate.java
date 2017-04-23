@@ -35,7 +35,7 @@ public class Calculate {
 		// Delete exception and implement here
 		double min_distance = Double.MAX_VALUE;
 		double distance;
-		
+
 		for (Movie movie : relatedMovies) {
 			distance = Math.abs(a.getAmountOfSquareSubSequences() - movie.getAmountOfSquareSubSequences());
 			if (distance < min_distance) {
@@ -48,9 +48,9 @@ public class Calculate {
 
 	public static double distanceBetweenTwoMovies(ArrayList<Rating> movie1, ArrayList<Rating> movie2, String type)
 			throws Exception {
-		
+
 		Object[] ratingArrays = ratingToArray(movie1, movie2);
-		
+
 		if (type.equals("cosine")) {
 			return cosineDistance(ratingArrays);
 		} else if (type.equals("euclidean")) {
@@ -78,12 +78,45 @@ public class Calculate {
 
 		HashMap<User, Double> ratingsMovie = new HashMap<>();
 		HashMap<User, Integer> amountUsersRatedMovie = new HashMap<>();
-
-		// TODO: Delete exception and implement here
-		if (true) {
-			throw new UnsupportedOperationException("Implement ratingBasedOnSimilarMovies in class Calculate.");
+		
+		// Delete exception and implement here
+		ArrayList<Rating> ratingsOfA = ratingsIndexedByMovie.get(a.getId());
+		
+		for (ComparableSimpleEntry comparableSimpleEntry : similarToA) {
+			Movie similarMovie = (Movie)comparableSimpleEntry.getValue();
+			
+			ArrayList<Rating> ratingsOfSimilarMovie = ratingsIndexedByMovie.get(similarMovie.getId());
+			
+			for (Rating rating : ratingsOfSimilarMovie) {				
+				boolean valid = true;
+				for (Rating ratingA : ratingsOfA) {
+					if (ratingA.getUser().getId() == rating.getUser().getId()) {
+						valid = false;
+					}
+				}
+				
+				if (valid
+						&& !ratingsMovie.containsKey(rating.getUser())
+						&& !amountUsersRatedMovie.containsKey(rating.getUser())) {
+					// The user of this rating did not rate Movie a and we didn't see that user before
+					// add <user, 1> to the HashMap amountUsersRatedMovie 
+					amountUsersRatedMovie.put(rating.getUser(), 1);
+					// add <user, rating> to the HashMap ratingsMovie
+					ratingsMovie.put(rating.getUser(), rating.getRating());
+				}
+				else if (valid) {
+					// The user of this rating did not rate Movie a, but we have seen that user before
+					double averageRating = ratingsMovie.get(rating.getUser()) * amountUsersRatedMovie.get(rating.getUser()) + rating.getRating();
+					// Increase value of user in HashMap amountUsersRatedMovie by 1
+					amountUsersRatedMovie.replace(rating.getUser(), amountUsersRatedMovie.get(rating.getUser()) + 1);
+					
+					averageRating /= amountUsersRatedMovie.get(rating.getUser());
+					// add <user, averageRating> to the HashMap ratingsMovie
+					ratingsMovie.replace(rating.getUser(), averageRating);
+				}
+			}
 		}
-
+		
 		return ratingsMovie;
 	}
 
@@ -106,11 +139,44 @@ public class Calculate {
 		HashMap<User, Double> ratingsMovie = new HashMap<>();
 		HashMap<User, Double> amountUsersRatedMovie = new HashMap<>();
 
-		// TODO: Delete exception and implement here
-		if (true) {
-			throw new UnsupportedOperationException("Implement ratingBasedOnSimilarMoviesWeighted in class Calculate.");
+		// Delete exception and implement here
+		ArrayList<Rating> ratingsOfA = ratingsIndexedByMovie.get(a.getId());
+		
+		for (ComparableSimpleEntry comparableSimpleEntry : similarToA) {
+			Movie similarMovie = (Movie)comparableSimpleEntry.getValue();
+			
+			ArrayList<Rating> ratingsOfSimilarMovie = ratingsIndexedByMovie.get(similarMovie.getId());
+			
+			for (Rating rating : ratingsOfSimilarMovie) {				
+				boolean valid = true;
+				for (Rating ratingA : ratingsOfA) {
+					if (ratingA.getUser().getId() == rating.getUser().getId()) {
+						valid = false;
+					}
+				}
+				
+				if (valid
+						&& !ratingsMovie.containsKey(rating.getUser())
+						&& !amountUsersRatedMovie.containsKey(rating.getUser())) {
+					// The user of this rating did not rate Movie a and we didn't see that user before
+					// add <user, 1> to the HashMap amountUsersRatedMovie 
+					amountUsersRatedMovie.put(rating.getUser(), comparableSimpleEntry.getKey());
+					// add <user, rating> to the HashMap ratingsMovie
+					ratingsMovie.put(rating.getUser(), rating.getRating());
+				}
+				else if (valid) {
+					// The user of this rating did not rate Movie a, but we have seen that user before
+					double averageRating = ratingsMovie.get(rating.getUser()) * amountUsersRatedMovie.get(rating.getUser()) + rating.getRating();
+					// Increase value of user in HashMap amountUsersRatedMovie by 1
+					amountUsersRatedMovie.replace(rating.getUser(), amountUsersRatedMovie.get(rating.getUser()) + 1);
+					
+					averageRating /= amountUsersRatedMovie.get(rating.getUser());
+					// add <user, averageRating> to the HashMap ratingsMovie
+					ratingsMovie.replace(rating.getUser(), averageRating);
+				}
+			}
 		}
-
+		
 		return ratingsMovie;
 	}
 
@@ -142,9 +208,9 @@ public class Calculate {
 
 		// Delete exception and implement here
 		// Do it like insertionSort
-		
+
 		int i = 0, j = 0;
-		
+
 		while (i < movie1.size() || j < movie2.size()) {
 			if (i == movie1.size()) {
 				r1.add(standard);
@@ -183,7 +249,7 @@ public class Calculate {
 		result[0] = r1;
 		result[1] = r2;
 		result[2] = inCommonRatings;
-		
+
 		return result;
 	}
 

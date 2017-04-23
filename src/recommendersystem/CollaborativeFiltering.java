@@ -24,7 +24,7 @@ import java.util.Map;
 public class CollaborativeFiltering {
 
 	public static void main(String[] args) throws IOException, Exception {
-		int debug = 4; // The number of the scenario you want to debug
+		int debug = 5; // The number of the scenario you want to debug
 
 		// ****************** Scenario 0: Reading the data.
 		// **********************************************
@@ -59,12 +59,12 @@ public class CollaborativeFiltering {
 			a2Correct.add(2.5);
 			a2Correct.add(2.0);
 			if (!a1Correct.equals(a1)) {
-				System.out.println("The array related to movie with ID 1 must be: " + a1Correct.toString() + " and not: "
-						+ a1.toString());
+				System.out.println("The array related to movie with ID 1 must be: " + a1Correct.toString()
+						+ " and not: " + a1.toString());
 			}
 			if (!a2Correct.equals(a2)) {
-				System.out.println("The array related to movie with ID 2 must be: " + a2Correct.toString() + " and not: "
-						+ a2.toString());
+				System.out.println("The array related to movie with ID 2 must be: " + a2Correct.toString()
+						+ " and not: " + a2.toString());
 			}
 			if (!inCommonRatings) {
 				System.out.println("Incomming ratings should be true");
@@ -85,7 +85,7 @@ public class CollaborativeFiltering {
 			a2Correct.add(2.5);
 			a2Correct.add(2.5);
 			a2Correct.add(4.0);
-			
+
 			if (!a1Correct.equals(a1)) {
 				System.out.println("The array related to movie with ID 1 must be: " + a1Correct.toString() + "and not: "
 						+ a1.toString());
