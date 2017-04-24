@@ -15,7 +15,6 @@ import java.util.Objects;
 public class SquareSubsequence {
 
 	private String halfString;
-
 	private ArrayList<Integer> leftIndices;
 	private ArrayList<Integer> rightIndices;
 
@@ -32,7 +31,6 @@ public class SquareSubsequence {
 	public boolean formsNewSquareSubsequence(SquareSubsequence other) {
 		// delete exception and implement here
 		// ONLY FOR DYNAMIC PROGRAMMING 2!
-
 		if (this.equals(other))
 			return true;
 		return false;

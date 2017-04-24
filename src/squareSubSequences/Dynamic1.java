@@ -28,8 +28,6 @@ public class Dynamic1 {
 		// Delete exception and implement here
 		// DYNAMIC WAY
 		
-		// System.out.println("String s = " + s);
-		
 		int res = 0;
 
 		// SquareSubsequence must be even and greater or equal to 2
@@ -53,9 +51,6 @@ public class Dynamic1 {
 					rightIndices.add(j);
 
 					ss2.add(new SquareSubsequence(halfString, leftIndices, rightIndices));
-
-					// System.out.println("New SquareSubsequence of length 2: "
-					// + halfString + halfString);
 				}
 			}
 		}
@@ -101,12 +96,10 @@ public class Dynamic1 {
 						}
 
 						tmp.add(new SquareSubsequence(halfString, leftIndices, rightIndices));
-
-						// System.out.println("New SquareSubsequence of length "
-						// + length + ": " + halfString + halfString);
 					}
 				}
 			}
+			
 			// If no SquareSubsequences of length length exist, return res
 			if (tmp.size() == 0)
 				return res;

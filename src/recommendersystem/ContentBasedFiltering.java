@@ -28,7 +28,7 @@ import squareSubSequences.Dynamic1;
 public class ContentBasedFiltering {
 
 	public static void main(String[] args) throws IOException {
-		int debug = 5; // The number of the scenario you want to debug
+		int debug = 0; // The number of the scenario you want to debug
 
 		// ****************** Scenario 0: Reading the data.
 		// **********************************************
@@ -47,7 +47,7 @@ public class ContentBasedFiltering {
 		// ****************** Scenario 1: count the number of present square
 		// subsequences. **********************************************
 		// Implement the function 'amountOfSquareSubSequences(String s)' in
-		// Dynamic2.java or Dynamic1.java
+		// Dynamic1.java and / or Dynamic2.java
 		// To aid a class, SquareSubsequences is implemented. This class enables
 		// you to store your found subsequences
 		// E.g., in the string 'baaba' a subsequence is (aa) where the indices
@@ -70,7 +70,7 @@ public class ContentBasedFiltering {
 		// QUESTION: If you implemented the second approach, compute its
 		// complexity.
 
-		boolean dynamic1 = true; // True: you implemented the dynamic way,
+		boolean dynamic1 = false; // True: you implemented the dynamic way,
 									// False: you implemented the recursive way
 
 		// Iterate over all movies, calculate the amount of square subsequences,
