@@ -28,7 +28,7 @@ import squareSubSequences.Dynamic1;
 public class ContentBasedFiltering {
 
 	public static void main(String[] args) throws IOException {
-		int debug = 0; // The number of the scenario you want to debug
+		int debug = 1; // The number of the scenario you want to debug
 
 		// ****************** Scenario 0: Reading the data.
 		// **********************************************
@@ -75,6 +75,7 @@ public class ContentBasedFiltering {
 
 		// Iterate over all movies, calculate the amount of square subsequences,
 		// and set it as an attribute of the movie
+		/*
 		for (Movie m : movies.values()) {
 			String s = m.getTitle();
 			int amount;
@@ -86,6 +87,7 @@ public class ContentBasedFiltering {
 			}
 			m.setAmountOfSquareSubSequences(amount);
 		}
+		*/
 
 		if (debug == 1) {
 			System.out.println("Debugging the calculation of square subsequences");
@@ -107,7 +109,7 @@ public class ContentBasedFiltering {
 				}
 				if (correctAnswer != ourAnswer) {
 					System.out.println("ERROR: The string: " + aLine + " should have " + correctAnswer
-							+ "subsequences and not " + ourAnswer);
+							+ " subsequences and not " + ourAnswer);
 				}
 			}
 		}

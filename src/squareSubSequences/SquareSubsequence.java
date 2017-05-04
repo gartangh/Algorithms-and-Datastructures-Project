@@ -29,11 +29,13 @@ public class SquareSubsequence {
 	}
 
 	public boolean formsNewSquareSubsequence(SquareSubsequence other) {
-		// delete exception and implement here
+		// Delete exception and implement here
 		// ONLY FOR DYNAMIC PROGRAMMING 2!
-		if (this.equals(other))
-			return true;
-		return false;
+		
+		if (this.equals(other)) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override

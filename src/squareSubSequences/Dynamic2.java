@@ -22,18 +22,15 @@ public class Dynamic2 {
 	 * @return The amount of square subsequences in string s is returned.
 	 */
 	public static int amountOfSquareSubSequences(String s) {
-		// TODO: Delete exception and implement here
+		// Delete exception and implement here
 		// RECURSIVE WAY (see Largest Common Subsequence (LCS)) 
-		
-		// Debug
-		System.out.println("String s = " + s);
 		
 		ArrayList<SquareSubsequence> squareSubSequences = new ArrayList<>();
 		
 		int n;
 		char[][] b;
 		int[][] c;
-		for (int m = 1; m < s.length(); m++) {
+		for (int m = 1; m < s.length()-1; m++) {
 			n = s.length() - m;
 			b = new char[m][n];
 			c = new int[m+1][n+1];
@@ -55,15 +52,32 @@ public class Dynamic2 {
 					ArrayList<Integer> leftIndices = new ArrayList<>();
 					ArrayList<Integer> rightIndices = new ArrayList<>();
 					
-					if (x.charAt(i) == y.charAt(j)) {
+					if (x.charAt(i-1) == y.charAt(j-1)) {
 						// Last letters are part of a SquareSubSequence
-						halfString = x.charAt(i) + halfString;
-						leftIndices.add(0, i);
-						rightIndices.add(0, m + j);
+						halfString += x.charAt(i-1);
+						leftIndices.add(0, i - 1);
+						rightIndices.add(0, m + j - 1);
 						
-						c[i][j] = c[i-1][j-1] + 1;
+						SquareSubsequence tmpSquareSubsequence = new SquareSubsequence(halfString, leftIndices, rightIndices);
+						
+						boolean valid = true;
+						
+						for (SquareSubsequence squareSubsequence : squareSubSequences) {
+							if (!squareSubsequence.formsNewSquareSubsequence(tmpSquareSubsequence)) {
+								valid = false;
+							}
+						}
+						
+						if (valid) {
+							squareSubSequences.add(tmpSquareSubsequence);
+						}
+						
+						/*
+						 * c[i][j] = c[i-1][j-1] + 1;
 						b[i][j] = '\\';
+						*/
 					}
+					/*
 					else if (c[i-1][j] >= c[i][j-1]) {
 						c[i][j] = c[i-1][j];
 						b[i][j] = '|';
@@ -72,11 +86,12 @@ public class Dynamic2 {
 						c[i][j] = c[i][j-1];
 						b[i][j] = '_';
 					}
+					*/
 				}
 			}
 		}
 		
-		int res = 0;
+		int res = squareSubSequences.size();
 		
 		return res;
 	}
