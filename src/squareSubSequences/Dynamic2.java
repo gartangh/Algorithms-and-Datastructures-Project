@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class Dynamic2 {
 
 	public Dynamic2() {
+		// Empty constructor
 	}
 
 	/**
@@ -25,15 +26,20 @@ public class Dynamic2 {
 		// Delete exception and implement here
 		// RECURSIVE WAY (see Largest Common Subsequence (LCS)) 
 		
-		ArrayList<SquareSubsequence> squareSubSequences = new ArrayList<>();
+		if (s.length() < 2)
+			return 0;
 		
+		// METHOD 1: not all of them are counted.
+		//ArrayList<SquareSubsequence> squareSubSequences = new ArrayList<>();
+		
+		/*
 		int n;
-		char[][] b;
-		int[][] c;
+		//char[][] b;
+		//int[][] c;
 		for (int m = 1; m < s.length()-1; m++) {
 			n = s.length() - m;
-			b = new char[m][n];
-			c = new int[m+1][n+1];
+			//b = new char[m][n];
+			//c = new int[m+1][n+1];
 			
 			// Initialization
 			String x = s.substring(0, m);
@@ -71,13 +77,11 @@ public class Dynamic2 {
 						if (valid) {
 							squareSubSequences.add(tmpSquareSubsequence);
 						}
-						
-						/*
-						 * c[i][j] = c[i-1][j-1] + 1;
-						b[i][j] = '\\';
-						*/
 					}
-					/*
+					//if ()
+						c[i][j] = c[i-1][j-1] + 1;
+						b[i][j] = '\\';
+					}
 					else if (c[i-1][j] >= c[i][j-1]) {
 						c[i][j] = c[i-1][j];
 						b[i][j] = '|';
@@ -86,12 +90,48 @@ public class Dynamic2 {
 						c[i][j] = c[i][j-1];
 						b[i][j] = '_';
 					}
-					*/
+				}
+			}
+		}*/
+		
+		// METHOD 1: not correct in all cases.
+		String x, y;
+		int res = 0, a, b, c;
+		
+		for (int m = 1; m < s.length(); m++) {
+			x = s.substring(0, m);
+			y = s.substring(m);
+			
+			for (a = 0; a < m; a++) {
+				if (y.charAt(0) == x.charAt(a)) {
+					res++;
+					for (b = m+1; b < s.length(); b++) {
+						for (c = a+1; c < m; c++) {
+							if (x.charAt(c) == y.charAt(b-m)) {
+								res++;
+							}
+						}
+					}
 				}
 			}
 		}
 		
-		int res = squareSubSequences.size();
+		// METHOD 3: counts to much.
+		/*
+		String x, y;
+		int res = 0, a;
+		
+		for (int m = 1; m < s.length(); m++) {
+			x = s.substring(0, m);
+			y = s.substring(m);
+			
+			for (a = 0; a < m; a++) {
+				if (y.charAt(0) == x.charAt(a)) {
+					res += 1 + amountOfSquareSubSequences(s.substring(a+1,m) + s.substring(m+1));
+				}
+			}
+		}
+		*/
 		
 		return res;
 	}

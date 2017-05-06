@@ -28,7 +28,7 @@ import squareSubSequences.Dynamic1;
 public class ContentBasedFiltering {
 
 	public static void main(String[] args) throws IOException {
-		int debug = 1; // The number of the scenario you want to debug
+		int debug = 5; // The number of the scenario you want to debug
 
 		// ****************** Scenario 0: Reading the data.
 		// **********************************************
@@ -70,12 +70,11 @@ public class ContentBasedFiltering {
 		// QUESTION: If you implemented the second approach, compute its
 		// complexity.
 
-		boolean dynamic1 = false; // True: you implemented the dynamic way,
+		boolean dynamic1 = true; // True: you implemented the dynamic way,
 									// False: you implemented the recursive way
 
 		// Iterate over all movies, calculate the amount of square subsequences,
 		// and set it as an attribute of the movie
-		/*
 		for (Movie m : movies.values()) {
 			String s = m.getTitle();
 			int amount;
@@ -87,7 +86,6 @@ public class ContentBasedFiltering {
 			}
 			m.setAmountOfSquareSubSequences(amount);
 		}
-		*/
 
 		if (debug == 1) {
 			System.out.println("Debugging the calculation of square subsequences");
@@ -198,6 +196,7 @@ public class ContentBasedFiltering {
 		double distance = Calculate.distanceToRelatedMoviesContentBased(m, favoriteMovie);
 		
 		if (debug == 4) {
+			System.out.println("Debugging the distance to related movies");
 			if (distance != 8) {
 				System.out.println("The distance from the movie to the liked movies must be 8 ");
 			}
@@ -215,6 +214,7 @@ public class ContentBasedFiltering {
 				new ArrayList<>(movies.values()), amountOfRelatedMovies);
 
 		if (debug == 5) {
+			System.out.println("Debugging the wanted string");
 			String wantedString = "";
 			wantedString += movies.get(9);
 			wantedString += "\n";

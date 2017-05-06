@@ -43,6 +43,8 @@ public class CollaborativeFiltering {
 		// ****************** Scenario 1: From rating to array
 		// **********************************************
 		if (debug == 1) {
+			System.out.println("1");
+			
 			Object[] rta = Calculate.ratingToArray(ratingsIndexedByMovie.get(1), ratingsIndexedByMovie.get(4));
 
 			ArrayList<Double> a1 = (ArrayList<Double>) rta[0];
@@ -105,6 +107,8 @@ public class CollaborativeFiltering {
 		// totally wrong? (So you see that the movies are not similar at all,
 		// but nevertheless the distance is zero)
 		if (debug == 2) {
+			System.out.println("2");
+			
 			double d = Calculate.distanceBetweenTwoMovies(ratingsIndexedByMovie.get(1), ratingsIndexedByMovie.get(4),
 					"cosine");
 			if (d != (1 - 35 / Math.sqrt(38.25) / Math.sqrt(35.25))) {
@@ -140,6 +144,8 @@ public class CollaborativeFiltering {
 				ratingsIndexedByMovie, amountOfSimilarMovies);
 
 		if (debug == 3) {
+			System.out.println("3");
+			
 			String correct = movies.get(2) + "\n";
 			correct += movies.get(4) + "\n";
 			correct += movies.get(3) + "\n";
@@ -160,6 +166,8 @@ public class CollaborativeFiltering {
 		HashMap<User, Double> ratingsMovie = Calculate.ratingBasedOnSimilarMovies(a, similarToA, ratingsIndexedByMovie);
 
 		if (debug == 4) {
+			System.out.println("4");
+			
 			String predicted = "";
 			for (Map.Entry<User, Double> entry : ratingsMovie.entrySet()) {
 				predicted += entry.getKey() + ": " + entry.getValue() + "\n";
@@ -180,6 +188,8 @@ public class CollaborativeFiltering {
 				ratingsIndexedByMovie);
 
 		if (debug == 5) {
+			System.out.println("5");
+			
 			String predicted = "";
 			for (Map.Entry<User, Double> entry : ratingsMovieWeighted.entrySet()) {
 				predicted += entry.getKey() + ": " + entry.getValue() + "\n";
