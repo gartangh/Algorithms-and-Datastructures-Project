@@ -96,5 +96,4 @@ public class Movie {
 	public void setAmountOfSquareSubSequences(int amountOfSquareSubSequences) {
 		this.amountOfSquareSubSequences = amountOfSquareSubSequences;
 	}
-
 }

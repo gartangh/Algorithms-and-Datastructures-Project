@@ -164,8 +164,7 @@ public class ContentBasedFiltering {
 			ComparableSimpleEntry closestElement = fspqTest.poll();
 			Movie closest = (Movie) closestElement.getValue();
 			if (!closest.getTitle().equals("Test3")) {
-				System.out
-						.println("The movie with title Test3 should be returned when the queue is polled three times");
+				System.out.println("The movie with title Test3 should be returned when the queue is polled three times");
 			}
 
 			// add the elements again

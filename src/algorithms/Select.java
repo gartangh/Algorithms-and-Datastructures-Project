@@ -32,9 +32,11 @@ public class Select {
 	public static ArrayList<Movie> maxRating(ArrayList<Rating> ratingsUser) {
 		double max_rating = 0.0;
 		ArrayList<Movie> maxRatings = new ArrayList<>();
+		
 		// Delete exception and implement here
 		for (Rating rating : ratingsUser) {
-			if (rating.getRating() == max_rating) maxRatings.add(rating.getMovie());
+			if (rating.getRating() == max_rating)
+				maxRatings.add(rating.getMovie());
 			else if (rating.getRating() > max_rating) {
 				max_rating = rating.getRating();
 				maxRatings = new ArrayList<>();
@@ -61,6 +63,7 @@ public class Select {
 			ArrayList<Movie> ratedMovies, ArrayList<Movie> allMovies, int amountOfRelatedMovies) {
 		
 		FixedSizedPriorityQueue fspq = new FixedSizedPriorityQueue(amountOfRelatedMovies);
+		
 		// Delete exception and implement here
 		// FOR CONTEND BASED ONLY
 		double distance;

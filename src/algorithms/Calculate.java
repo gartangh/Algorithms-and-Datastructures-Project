@@ -83,12 +83,13 @@ public class Calculate {
 		ArrayList<Rating> ratingsOfA = ratingsIndexedByMovie.get(a.getId());
 
 		for (ComparableSimpleEntry comparableSimpleEntry : similarToA) {
-			Movie similarMovie = (Movie) comparableSimpleEntry.getValue();
-
+			Movie similarMovie = (Movie)comparableSimpleEntry.getValue();
 			ArrayList<Rating> ratingsOfSimilarMovie = ratingsIndexedByMovie.get(similarMovie.getId());
-
+			
+			// Check if the user rated movie A, if he / she did, valid becomes false
+			boolean valid;
 			for (Rating rating : ratingsOfSimilarMovie) {
-				boolean valid = true;
+				valid = true;
 				for (Rating ratingA : ratingsOfA) {
 					if (ratingA.getUser().getId() == rating.getUser().getId()) {
 						valid = false;
@@ -146,9 +147,9 @@ public class Calculate {
 
 		for (ComparableSimpleEntry comparableSimpleEntry : similarToA) {
 			Movie similarMovie = (Movie) comparableSimpleEntry.getValue();
-
 			ArrayList<Rating> ratingsOfSimilarMovie = ratingsIndexedByMovie.get(similarMovie.getId());
 
+			// Check if the user rated movie A, if he / she did, valid becomes false
 			for (Rating rating : ratingsOfSimilarMovie) {
 				boolean valid = true;
 				for (Rating ratingA : ratingsOfA) {
@@ -168,6 +169,9 @@ public class Calculate {
 				} else if (valid) {
 					// The user of this rating did not rate Movie a, but we have
 					// seen that user before
+					// THERE IS A MISTAKE HERE!!!
+					// The bigger the distance, the more it's weight
+					// We could use 1-distance when using cosine distance
 					double averageRating = ratingsMovie.get(rating.getUser())
 							* amountUsersRatedMovie.get(rating.getUser()) + rating.getRating() * comparableSimpleEntry.getKey();
 					// Increase value of user in HashMap amountUsersRatedMovie
@@ -213,7 +217,6 @@ public class Calculate {
 
 		// Delete exception and implement here
 		// Do it like insertionSort
-
 		int i = 0, j = 0;
 
 		while (i < movie1.size() || j < movie2.size()) {
@@ -274,7 +277,7 @@ public class Calculate {
 		boolean inCommonRatings = (boolean) result[2];
 
 		// Delete exception and implement here
-		double res = 0.0;
+		double res = Double.POSITIVE_INFINITY;
 
 		if (inCommonRatings) {
 			double a = 0.0, b = 0.0, c = 0.0;
@@ -291,8 +294,7 @@ public class Calculate {
 			res = a / (b * c);
 
 			res = 1 - res;
-		} else
-			res = Double.POSITIVE_INFINITY;
+		}
 
 		return res;
 	}
@@ -313,7 +315,7 @@ public class Calculate {
 		boolean inCommonRatings = (boolean) result[2];
 
 		// Delete exception and implement here
-		double res = 0.0;
+		double res = Double.POSITIVE_INFINITY;
 
 		if (inCommonRatings) {
 			for (int i = 0; i < a1.size(); i++) {
@@ -321,8 +323,7 @@ public class Calculate {
 			}
 
 			res = Math.sqrt(res);
-		} else
-			res = Double.POSITIVE_INFINITY;
+		}
 
 		return res;
 	}
